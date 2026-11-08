@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>imena_3d · Pedidos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Un solo mundo visual: noche de pino navideña, tarjetas de papel, rojo y oro. Capas impresas como motivo. */
+  --pine: #0e2b23;
+  --pine-2: #163b30;
+  --paper: #f5efe3;
+  --ink: #1b1f1c;
+  --red: #c9302a;
+  --gold: #e7b24c;
+  --muted: #5d665f;
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--pine);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+a { color: var(--gold); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+/* Cabecera */
+header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 0; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--paper); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 30px; height: 30px; }
+.ig-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1.5px solid rgba(245,239,227,.35); border-radius: 999px; color: var(--paper); text-decoration: none; font-weight: 700; font-size: 15px; }
+.ig-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Portada */
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding: 28px 0 48px; }
+.hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(38px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 18px; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.lead { font-size: 19px; max-width: 34ch; margin: 0 0 26px; color: #dfe6df; }
+.welcome { display: inline-block; background: rgba(231,178,76,.14); color: var(--gold); padding: 6px 12px; border-radius: 6px; font-size: 15px; font-weight: 700; margin-bottom: 18px; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: 16px; padding: 14px 22px; border-radius: 10px; border: 0; cursor: pointer; text-decoration: none; }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: #b0271f; }
+.btn-ghost { background: transparent; color: var(--paper); border: 1.5px solid rgba(245,239,227,.4); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Árbol impreso por capas */
+.tree-card { position: relative; background: var(--pine-2); border-radius: 18px; padding: 28px 24px 20px; }
+.tree-card canvas { width: 100%; height: auto; display: block; }
+.tree-caption { display: flex; justify-content: space-between; font-size: 13px; color: #a9b8ad; margin-top: 10px; font-variant-numeric: tabular-nums; }
+
+/* Secciones */
+section { padding: 48px 0; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.sec-head p { margin: 0; color: #b9c6bc; max-width: 46ch; }
+
+/* Catálogo */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.item { background: var(--paper); color: var(--ink); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.item svg { width: 54px; height: 54px; }
+.item h3 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+.item p { margin: 0; font-size: 15.5px; color: #3e4540; }
+.item .tag { align-self: flex-start; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--red); }
+.item.feature { background: var(--gold); }
+.item.feature p { color: #2b2716; }
+
+/* Cómo funciona */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
+.step { border-top: 3px solid var(--gold); padding-top: 14px; }
+.step b { font-family: var(--display); font-size: 20px; display: block; margin-bottom: 4px; }
+.step p { margin: 0; color: #c9d4cb; font-size: 16px; }
+.step .n { font-family: var(--display); color: var(--gold); font-weight: 800; font-size: 15px; }
+
+/* Formulario */
+.order { background: var(--paper); color: var(--ink); border-radius: 18px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.order h2 { color: var(--ink); }
+.order .intro p { color: #3e4540; }
+form { display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+label, legend { font-weight: 700; font-size: 15px; }
+input[type=text], input[type=number], input[type=date], textarea {
+  font: inherit; font-size: 16px; padding: 11px 12px; border: 1.5px solid #c9c1b0; border-radius: 9px; background: #fffdf8; color: var(--ink); width: 100%;
+}
+input:focus, textarea:focus { border-color: var(--pine-2); outline: none; box-shadow: 0 0 0 3px rgba(22,59,48,.18); }
+textarea { min-height: 96px; resize: vertical; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+fieldset { border: 0; padding: 0; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip span { display: inline-block; padding: 8px 13px; border-radius: 999px; border: 1.5px solid #c9c1b0; font-size: 15px; cursor: pointer; background: #fffdf8; user-select: none; }
+.chip input:checked + span { background: var(--pine); color: var(--paper); border-color: var(--pine); }
+.chip input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+.hint { font-size: 13.5px; color: var(--muted); }
+.err { color: var(--red); font-weight: 700; font-size: 14.5px; min-height: 1.2em; margin: 0; }
+
+.result { display: none; background: var(--pine); color: var(--paper); border-radius: 14px; padding: 20px; gap: 12px; }
+.result.show { display: grid; }
+.result pre { white-space: pre-wrap; font-family: var(--body); font-size: 15px; background: rgba(0,0,0,.22); padding: 14px; border-radius: 10px; margin: 0; max-height: 260px; overflow: auto; }
+.result .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.result small { color: #b9c6bc; }
+.contact-line { font-size: 15px; color: #3e4540; }
+.contact-line strong { color: var(--ink); }
+
+footer { padding: 36px 0 48px; color: #93a597; font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-top: 1px solid rgba(245,239,227,.12); margin-top: 24px; }
+
+@media (max-width: 820px) {
+  .hero, .order { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .tree-card { max-width: 380px; }
+}
+@media (max-width: 420px) {
+  .two { grid-template-columns: 1fr; }
+  .order { padding: 22px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#inicio" aria-label="imena_3d, inicio">
+      <svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><rect x="3" y="22" width="24" height="4" rx="1" fill="#e7b24c"/><rect x="6" y="16" width="18" height="4" rx="1" fill="#f5efe3"/><rect x="9" y="10" width="12" height="4" rx="1" fill="#c9302a"/><rect x="12" y="4" width="6" height="4" rx="1" fill="#f5efe3"/></svg>
+      imena_3d
+    </a>
+    <a class="ig-pill" href="https://www.instagram.com/imena_3d/" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @imena_3d
+    </a>
+  </header>
+
+  <main id="inicio">
+    <div class="hero">
+      <div>
+        <span class="welcome">¿Has visto las figuras de Navidad en Quésame? Son mías</span>
+        <h1>Regalos impresos en 3D, <em>capa a capa</em>, para esta Navidad</h1>
+        <p class="lead">Diseño cada pieza yo mismo y la imprimo en casa, en Madrid. Figuras navideñas, llaveros y muñecos personalizados y maquetas para regalar.</p>
+        <div class="cta-row">
+          <a class="btn btn-red" href="#pedido">Hacer un pedido</a>
+          <a class="btn btn-ghost" href="#catalogo">Ver qué hago</a>
+        </div>
+      </div>
+      <div class="tree-card" aria-hidden="true">
+        <canvas id="tree" width="400" height="420"></canvas>
+        <div class="tree-caption"><span>Árbol · 0,2 mm por capa</span><span id="layers">0 capas</span></div>
+      </div>
+    </div>
+
+    <section id="catalogo">
+      <div class="sec-head">
+        <h2>Lo que puedo hacerte</h2>
+        <p>Todo se puede adaptar: colores, tamaño y texto. Si tienes una idea que no está aquí, cuéntamela.</p>
+      </div>
+      <div class="grid">
+        <article class="item feature">
+          <svg viewBox="0 0 54 54" aria-hidden="true"><path d="M27 5 L41 26 H34 L45 42 H9 L20 26 H13 Z" fill="#163b30"/><rect x="23" y="42" width="8" height="7" fill="#7a4a24"/><circle cx="27" cy="5" r="3.5" fill="#c9302a"/></svg>
+          <span class="tag">Navidad</span>
+          <h3>Figuras navideñas</h3>
+          <p>Árboles, estrellas y adornos para la mesa o el escaparate, como los que tienes en Quésame.</p>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 54 54" aria-hidden="true"><circle cx="18" cy="16" r="8" fill="none" stroke="#5d665f" stroke-width="3"/><rect x="18" y="20" width="26" height="26" rx="6" fill="#c9302a"/><text x="31" y="38" font-family="Arial" font-weight="700" font-size="13" fill="#fff" text-anchor="middle">TU</text></svg>
+          <span class="tag">Personalizado</span>
+          <h3>Llaveros personalizados</h3>
+          <p>Con tu nombre, una frase o el diseño que quieras. Ideales para regalar en grupo.</p>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 54 54" aria-hidden="true"><rect x="13" y="6" width="28" height="24" rx="8" fill="#e7b24c"/><circle cx="22" cy="18" r="3" fill="#1b1f1c"/><circle cx="32" cy="18" r="3" fill="#1b1f1c"/><rect x="19" y="30" width="16" height="13" rx="3" fill="#c9302a"/><rect x="15" y="43" width="24" height="5" rx="2" fill="#163b30"/></svg>
+          <span class="tag">Personalizado</span>
+          <h3>Muñecos cabezones personalizados</h3>
+          <p>Una figura de cabeza grande que se parece a ti o a quien quieras regalar: pelo, ropa y detalles a tu gusto.</p>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 54 54" aria-hidden="true"><ellipse cx="27" cy="30" rx="22" ry="14" fill="#163b30"/><ellipse cx="27" cy="30" rx="13" ry="7" fill="#3f8a4e"/><path d="M5 30 V22 Q27 6 49 22 V30" fill="none" stroke="#c9302a" stroke-width="3"/></svg>
+          <span class="tag">Maquetas</span>
+          <h3>Maquetas</h3>
+          <p>Estadios de fútbol, aviones y coches impresos por piezas y a color. Un regalo para el aficionado.</p>
+        </article>
+        <article class="item">
+          <svg viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="20" fill="#163b30"/><g fill="#e7b24c"><circle cx="17" cy="27" r="4"/><circle cx="27" cy="27" r="4"/><circle cx="37" cy="27" r="4"/></g></svg>
+          <span class="tag">A medida</span>
+          <h3>Otros</h3>
+          <p>¿Tienes otra idea? Cuéntamela y vemos si se puede imprimir.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="sec-head"><h2>Cómo funciona</h2></div>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><b>Me cuentas qué quieres</b><p>Rellena el formulario de abajo o escríbeme por Instagram.</p></div>
+        <div class="step"><span class="n">2</span><b>Te paso precio y plazo</b><p>Te respondo con el presupuesto y, si hace falta, una vista previa del diseño.</p></div>
+        <div class="step"><span class="n">3</span><b>Lo imprimo para ti</b><p>Cuando me das el visto bueno lo imprimo y quedamos para la entrega o te lo envío.</p></div>
+      </div>
+    </section>
+
+    <section id="pedido">
+      <div class="order">
+        <div class="intro">
+          <h2>Pide el tuyo</h2>
+          <p>No hace falta tener Instagram. Rellena esto y se prepara un mensaje con tu pedido que puedes enviarme por correo.</p>
+          <p class="contact-line">Correo: <strong>imena3dregalos@gmail.com</strong><br>Instagram: <a href="https://www.instagram.com/imena_3d/" target="_blank" rel="noopener" style="color:var(--red)">@imena_3d</a></p>
+          <p class="hint">Para Navidad, cuanto antes me escribas, mejor: cada pieza se imprime por encargo.</p>
+        </div>
+
+        <form id="f" novalidate>
+          <div class="two">
+            <div class="field"><label for="nombre">Tu nombre</label><input type="text" id="nombre" autocomplete="name" required></div>
+            <div class="field"><label for="contacto">Teléfono o correo</label><input type="text" id="contacto" autocomplete="email" required></div>
+          </div>
+
+          <fieldset>
+            <legend>¿Qué te interesa?</legend>
+            <div class="chips" id="chips">
+              <label class="chip"><input type="checkbox" id="p-figuras" value="Figuras navideñas"><span>Figuras navideñas</span></label>
+              <label class="chip"><input type="checkbox" id="p-llaveros" value="Llaveros personalizados"><span>Llaveros personalizados</span></label>
+              <label class="chip"><input type="checkbox" id="p-cabezones" value="Muñeco cabezón personalizado"><span>Muñeco cabezón</span></label>
+              <label class="chip"><input type="checkbox" id="p-maquetas" value="Maqueta"><span>Maquetas</span></label>
+              <label class="chip"><input type="checkbox" id="p-otro" value="Otros"><span>Otros</span></label>
+            </div>
+          </fieldset>
+
+          <div class="two">
+            <div class="field"><label for="cantidad">Cantidad aproximada</label><input type="number" id="cantidad" min="1" inputmode="numeric" placeholder="p. ej. 10"></div>
+            <div class="field"><label for="fecha">¿Para cuándo lo necesitas?</label><input type="date" id="fecha"></div>
+          </div>
+
+          <div class="field">
+            <label for="detalle">Cuéntame tu idea</label>
+            <textarea id="detalle" placeholder="Colores, texto o nombre que quieres, tamaño…"></textarea>
+          </div>
+
+          <p class="err" id="err" role="alert"></p>
+          <button class="btn btn-red" type="submit">Preparar mi pedido</button>
+
+          <div class="result" id="result" aria-live="polite">
+            <b>Tu pedido está listo para enviar</b>
+            <pre id="msg"></pre>
+            <div class="actions">
+              <a class="btn btn-red" id="mail" href="#">Enviar por correo</a>
+              <button class="btn btn-ghost" type="button" id="copy">Copiar mensaje</button>
+            </div>
+            <small id="copyNote">Si el botón de correo no abre tu aplicación, copia el mensaje y mándalo a imena3dregalos@gmail.com o por Instagram a @imena_3d.</small>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>imena_3d · Impresión 3D hecha en Madrid</span>
+    <a href="https://www.instagram.com/imena_3d/" target="_blank" rel="noopener">Sígueme en Instagram</a>
+  </footer>
+</div>
+
+<script>
+// Árbol que se "imprime" capa a capa
+(function () {
+  const c = document.getElementById('tree');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height, layerH = 6;
+  const total = Math.floor((H - 30) / layerH);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const label = document.getElementById('layers');
+  function widthAt(y) { // y desde abajo
+    const trunk = 50;
+    if (y < trunk) return 46;
+    const t = (y - trunk) / (H - 60 - trunk);
+    const tiers = 3, local = (t * tiers) % 1;
+    const tier = Math.floor(t * tiers);
+    const base = 330 - tier * 80;
+    return Math.max(8, base * (1 - local * 0.62));
+  }
+  function colorAt(y, i) {
+    if (y < 50) return i % 2 ? '#6b4020' : '#7a4a24';
+    return i % 2 ? '#2f7a45' : '#358a4e';
+  }
+  function draw(n) {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < n; i++) {
+      const y = i * layerH, w = widthAt(y);
+      ctx.fillStyle = colorAt(y, i);
+      ctx.fillRect((W - w) / 2, H - 10 - y - layerH, w, layerH - 1);
+      if (y > 60 && i % 7 === 3 && w > 40) {
+        ctx.fillStyle = i % 14 === 3 ? '#c9302a' : '#e7b24c';
+        ctx.beginPath(); ctx.arc((W - w) / 2 + w * ((i * 37) % 100) / 100, H - 10 - y - 3, 5, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    if (n >= total) {
+      ctx.fillStyle = '#e7b24c';
+      const cx = W / 2, cy = H - 10 - total * layerH - 6;
+      ctx.beginPath();
+      for (let k = 0; k < 10; k++) { const r = k % 2 ? 7 : 16, a = -Math.PI / 2 + k * Math.PI / 5; ctx.lineTo(cx + r * Math.cos(a), cy + r * Math.sin(a)); }
+      ctx.closePath(); ctx.fill();
+    }
+    label.textContent = n + ' capas';
+  }
+  if (reduce) { draw(total); return; }
+  // Estado visible desde el primer momento: empieza ya medio impreso
+  let n = Math.floor(total * 0.55);
+  draw(n);
+  const timer = setInterval(() => { n++; draw(n); if (n >= total) clearInterval(timer); }, 45);
+})();
+
+// Formulario
+(function () {
+  const f = document.getElementById('f');
+  const err = document.getElementById('err');
+  const res = document.getElementById('result');
+  const msgEl = document.getElementById('msg');
+  const mail = document.getElementById('mail');
+  const EMAIL = 'imena3dregalos@gmail.com';
+  let text = '';
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const contacto = document.getElementById('contacto').value.trim();
+    const prods = [...document.querySelectorAll('#chips input:checked')].map(i => i.value);
+    const cantidad = document.getElementById('cantidad').value.trim();
+    const fecha = document.getElementById('fecha').value;
+    const detalle = document.getElementById('detalle').value.trim();
+    if (!nombre || !contacto) { err.textContent = 'Pon tu nombre y un teléfono o correo para poder responderte.'; return; }
+    if (!prods.length && !detalle) { err.textContent = 'Marca algún producto o cuéntame tu idea en el último campo.'; return; }
+    err.textContent = '';
+    let fechaTxt = '';
+    if (fecha) { const [y, m, d] = fecha.split('-'); fechaTxt = d + '/' + m + '/' + y; }
+    text = 'Hola, quiero hacer un pedido a imena_3d.\n\n' +
+      'Nombre: ' + nombre + '\n' +
+      'Contacto: ' + contacto + '\n' +
+      (prods.length ? 'Me interesa: ' + prods.join(', ') + '\n' : '') +
+      (cantidad ? 'Cantidad aproximada: ' + cantidad + '\n' : '') +
+      (fechaTxt ? 'Lo necesito para: ' + fechaTxt + '\n' : '') +
+      (detalle ? '\nMi idea:\n' + detalle + '\n' : '');
+    msgEl.textContent = text;
+    mail.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Pedido imena_3d · ' + nombre) + '&body=' + encodeURIComponent(text);
+    res.classList.add('show');
+    res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  document.getElementById('copy').addEventListener('click', async (ev) => {
+    const b = ev.currentTarget;
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Mensaje copiado'; }
+    catch (e) {
+      const r = document.createRange(); r.selectNodeContents(msgEl);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      b.textContent = 'Seleccionado: copia con Ctrl+C';
+    }
+    setTimeout(() => { b.textContent = 'Copiar mensaje'; }, 2500);
+  });
+})();
+</script>
+</body>
+</html>
